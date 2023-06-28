@@ -1,0 +1,253 @@
+<div class="col-sm-12" style="margin-top: 60px">
+  <mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer
+      #drawer
+      [ngClass]="!isSmart ? 'sidenav-big' : 'sidenav-smart'"
+      mode="side"
+      [opened]="true"
+    >
+      <div class="col-sm-12 p-2">
+        <div class="col-sm-12 flex" style="padding: 2px 10px">
+          <div class="txt-lg bold">Evaluate Assessment {{ course_id }}</div>
+
+          <div>
+            <mat-icon (click)="drawer.toggle()">cancel</mat-icon>
+          </div>
+        </div>
+        <div class="txt-md p-2">
+          Conduct assessment activities with professionalism, integrity, and
+          ethical considerations. Treat student assessments with
+          confidentiality, ensuring the integrity of the assessment process.
+        </div>
+
+        <div
+          class="col-sm-12 txt-md bold mt-2"
+          *ngFor="let data of evalQue; let i = index"
+          style="padding-left: 20px"
+        >
+          <a
+            style="cursor: pointer"
+            (click)="get_assessment_obj_by_student_id(data.student_id)"
+            (click)="isSmart ? drawer.toggle() : null"
+            >{{ i + 1 + ". " + data.first_name + " " + data.last_name }}</a
+          >
+        </div>
+      </div>
+    </mat-drawer>
+
+    <div class="sidenav-content" style="min-height: 600px">
+      <div class="col-sm-12 text-end p-2" style="padding: 2px 10px">
+        <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+      </div>
+      <div *ngIf="arrAssessmentObj.length == 0" class="col-sm-12 p-1">
+        No data to show
+      </div>
+      <div *ngIf="arrAssessmentObj.length > 0" class="col-sm-12 p-1">
+        <div
+          *ngFor="let data of arrAssessmentObj; let k = index"
+          style="width: 100%"
+        >
+          <div class="col-sm-12" style="color: green">
+            <div>
+              <div *ngFor="let resp of data.response" class="shadow">
+                <div class="mt-3 bold txt-bg p-3">
+                  {{
+                    resp.question_type == 2
+                      ? "Fillin the blanks"
+                      : resp.question_type == 3
+                      ? "Short questions"
+                      : resp.question_type == 4
+                      ? "Verbal Assessment"
+                      : null
+                  }}
+                </div>
+                <div
+                  class="p-2"
+                  *ngFor="let dx of resp.prog_breakdown; let i = index"
+                >
+                  <div class="mb-1" *ngIf="resp.question_type == 2">
+                    <div class="bold" style="padding-left: 18px">
+                      {{ i + 1 + ". " + dx.question_text }}
+                    </div>
+                    <div style="padding-left: 18px">
+                      <div>
+                        {{ "Answer : " + dx.answer }}
+                      </div>
+                      <div>
+                        <table>
+                          <tr>
+                            <td>Pass :</td>
+                            <td style="padding-right: 40px">
+                              <mat-icon
+                                class="mt-1"
+                                (click)="
+                                  evaluate_answer(
+                                    data.student_id,
+                                    resp.session_id,
+                                    dx.question_id,
+                                    1
+                                  )
+                                "
+                                >{{
+                                  dx.isPassed == 1
+                                    ? "check_box"
+                                    : "check_box_outline_blank"
+                                }}</mat-icon
+                              >
+                            </td>
+                            <td>Fail :</td>
+                            <td>
+                              <mat-icon
+                                class="mt-1"
+                                (click)="
+                                  evaluate_answer(
+                                    data.student_id,
+                                    resp.session_id,
+                                    dx.question_id,
+                                    0
+                                  )
+                                "
+                                >{{
+                                  dx.isPassed == 1
+                                    ? "check_box_outline_blank"
+                                    : "check_box"
+                                }}</mat-icon
+                              >
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-1" *ngIf="resp.question_type == 3">
+                    <div style="padding-left: 18px">
+                      {{ i + 1 + ". " + dx.question_text }}
+                    </div>
+                    <div style="padding-left: 18px">
+                      <div>
+                        {{ "Answer : " + dx.answer }}
+                      </div>
+                      <div>
+                        <table>
+                          <tr>
+                            <td>Pass :</td>
+                            <td style="padding-right: 40px">
+                              <mat-icon
+                                class="mt-1"
+                                (click)="
+                                  evaluate_answer(
+                                    data.student_id,
+                                    resp.session_id,
+                                    dx.question_id,
+                                    1
+                                  )
+                                "
+                                >{{
+                                  dx.isPassed == 1
+                                    ? "check_box"
+                                    : "check_box_outline_blank"
+                                }}</mat-icon
+                              >
+                            </td>
+                            <td>Fail :</td>
+                            <td>
+                              <mat-icon
+                                class="mt-1"
+                                (click)="
+                                  evaluate_answer(
+                                    data.student_id,
+                                    resp.session_id,
+                                    dx.question_id,
+                                    0
+                                  )
+                                "
+                                >{{
+                                  dx.isPassed == 1
+                                    ? "check_box_outline_blank"
+                                    : "check_box"
+                                }}</mat-icon
+                              >
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-1" *ngIf="resp.question_type == 4">
+                    <div style="padding-left: 18px">
+                      {{ i + 1 + ". " + dx.question_text }}
+                    </div>
+                    <div style="padding-left: 18px">
+                      <table>
+                        <tr>
+                          <td>Listen :</td>
+                          <td style="padding-right: 40px">
+                            <mat-icon
+                              class="mt-1"
+                              (click)="
+                                play_audio(data.student_id, dx.question_id)
+                              "
+                              >volume_up</mat-icon
+                            >
+                          </td>
+                          <td>Pass :</td>
+                          <td style="padding-right: 40px">
+                            <mat-icon
+                              class="mt-1"
+                              (click)="
+                                evaluate_answer(
+                                  data.student_id,
+                                  resp.session_id,
+                                  dx.question_id,
+                                  1
+                                )
+                              "
+                              >{{
+                                dx.isPassed == 1
+                                  ? "check_box"
+                                  : "check_box_outline_blank"
+                              }}</mat-icon
+                            >
+                          </td>
+                          <td>Fail :</td>
+                          <td>
+                            <mat-icon
+                              class="mt-1"
+                              (click)="
+                                evaluate_answer(
+                                  data.student_id,
+                                  resp.session_id,
+                                  dx.question_id,
+                                  0
+                                )
+                              "
+                              >{{
+                                dx.isPassed == 1
+                                  ? "check_box_outline_blank"
+                                  : "check_box"
+                              }}</mat-icon
+                            >
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2 mb-2">
+                <button
+                  class="btn"
+                  (click)="evaluate_assessment(data.response)"
+                >
+                  Submit Remarks
+                </button>
+              </div>
+            </div>
+            <div *ngIf="isCourseComplete">Educator Actions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>

@@ -1,0 +1,25 @@
+<div class="col-sm-12 text-center p-2" style="border: thin solid #ddd">
+  <div class="header">{{ stateService.course_id }}</div>
+  <div class="txt-md">
+    {{
+      "Page No " +
+        stateService.page_id +
+        " off Module " +
+        stateService.module_id
+    }}
+  </div>
+</div>
+<div class="col-sm-12">
+  <ckeditor [(ngModel)]="stateService.model.editorData"></ckeditor>
+</div>
+<div
+  class="col-sm-12 text-start"
+  style="padding: 5px 30px 5px 30px"
+  [innerHTML]="content"
+  width="100%"
+></div>
+<div class="col-sm-12 txt-md">
+  <div>
+    <button class="btn" (click)="save_edit_content()">Save</button>
+  </div>
+</div>

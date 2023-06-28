@@ -1,0 +1,71 @@
+<!-- <div class="col-sm-12">
+  <app-navbar [arrNav]="arrNavByUser"></app-navbar>
+</div> -->
+
+<div class="col-sm-12" style="margin-top: 70px">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-8 shadow text-center p-3 flex">
+      <div
+        *ngIf="!isSmart"
+        class="txt-xl bold"
+        style="width: 100%; background-color: #fff"
+      >
+        <div>
+          <img
+            src="{{ mediaPath + 'images/site/common/login.png' }}"
+            alt=""
+            width="100%"
+            height="auto"
+          />
+        </div>
+      </div>
+      <div class="text-start p-3" style="width: 100%; background-color: #eee">
+        <form #l="ngForm" autocomplete="off" (ngSubmit)="login(l.value)">
+          <div class="mb-1">
+            <label for="email" class="form-label">Email:</label>
+            <input
+              type="email"
+              class="form-control input"
+              id="staff_email"
+              name="staff_email"
+              [(ngModel)]="staff_email"
+              placeholder="Enter email"
+              style="margin-top: -8px"
+            />
+          </div>
+          <div class="mb-1">
+            <label for="pwd" class="form-label">Password:</label>
+            <input
+              type="password"
+              class="form-control input"
+              id="passwd"
+              name="passwd"
+              [(ngModel)]="passwd"
+              placeholder="Enter password"
+              style="margin-top: -8px"
+            />
+          </div>
+          <div class="mt-3 txt-lg">
+            Do not have account,
+            <a
+              (click)="signup_now()"
+              class="bold"
+              style="cursor: pointer; color: rgb(48, 5, 240)"
+              >SIGN UP</a
+            >
+            now
+          </div>
+          <button type="submit" class="btn mt-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-sm-12" style="margin-top: 30px">
+  <div class="row">
+    <div class="col-sm-6 d-flex justify-content-center">
+      <div><h2>Sign in</h2></div>
+      <
+    </div>
+  </div>
+</div> -->
+</div>

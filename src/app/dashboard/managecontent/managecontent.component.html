@@ -1,0 +1,508 @@
+<div class="col-sm-12" style="margin-top: 55px">
+  <mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer
+      #drawer
+      [ngClass]="!isSmart ? 'sidenav-big' : 'sidenav-smart'"
+      mode="side"
+      [opened]="true"
+    >
+      <div class="col-sm-12 outer">
+        <div class="col-sm-12 flex" style="padding: 2px 10px">
+          <button mat-mini-fab (click)="back_to_home()" color="default">
+            <mat-icon>home</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="drawer.toggle()" color="default">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+        <div class="col-sm-12 text-start mt-2">
+          <!-- <div class="col-sm-12 txt-lg bold">Manage Content</div> -->
+          <div class="col-sm-12">
+            <mat-tab-group [selectedIndex]="selectedIndex">
+              <mat-tab label="ADD CONTENT" (click)="tab_click(0)">
+                <div class="mt-2 p-2">
+                  <div class="col-sm-12">
+                    <mat-vertical-stepper [linear]="isLinear" #stepper>
+                      <mat-step [completed]="false">
+                        <ng-template matStepLabel
+                          ><div class="txt-header mt-2 bold">
+                            Guidelines for Course {{ course_id }}
+                          </div></ng-template
+                        >
+                        <div class="mt-1">
+                          <div>
+                            <form
+                              #c="ngForm"
+                              autocomplete="off"
+                              (ngSubmit)="add_course(c.value)"
+                            >
+                              <label
+                                for="course_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Course Id</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="course_id"
+                                name="course_id"
+                                [(ngModel)]="course_id"
+                                placeholder="Course Id"
+                                readonly
+                              />
+                              <label
+                                for="course_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Course Title</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="course_title"
+                                name="course_title"
+                                [(ngModel)]="course_title"
+                                placeholder="Course Title"
+                                readonly
+                              />
+                              <label
+                                for="course_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Course Duration</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="course_duration"
+                                name="course_duration"
+                                [(ngModel)]="course_duration"
+                                placeholder="Course Duration"
+                                readonly
+                              />
+                              <label
+                                for="course_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Course Guidelines</label
+                              >
+                              <textarea
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -10px; height: 100px"
+                                id="guidelines"
+                                name="guidelines"
+                                [(ngModel)]="guidelines"
+                                placeholder="Course Guideline"
+                                readonly
+                              ></textarea>
+                              <!-- <div class="flex">
+                                <button class="btn mt-1" style="width: 100px">
+                                  Submit
+                                </button>
+                                <div *ngIf="resp != ''">{{ resp }}</div>
+                              </div> -->
+                            </form>
+                          </div>
+                        </div>
+                      </mat-step>
+                      <mat-step [completed]="false">
+                        <ng-template matStepLabel
+                          ><div class="txt-header mt-2 bold">
+                            ADD MODULE
+                          </div></ng-template
+                        >
+                        <div>
+                          <form
+                            #s="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="add_module(s.value)"
+                          >
+                            <div>
+                              <label
+                                for="course_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Select Course</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="course_id"
+                                name="course_id"
+                                [(ngModel)]="course_id"
+                                placeholder="Course id"
+                                readonly
+                              />
+                              <!-- <select
+                                class="form-select txt-md input"
+                                style="margin-top: -8px"
+                                type="text"
+                                id="course_id"
+                                name="course_id"
+                                [(ngModel)]="course_id"
+                                aria-label="Default"
+                                (change)="on_change_course($event)"
+                              >
+                                <option value="" selected>
+                                  -- Select Course --
+                                </option>
+                                <option
+                                  *ngFor="let data of arrCourses"
+                                  [value]="data.course_id"
+                                >
+                                  {{ data.course_title }}
+                                </option>
+                              </select> -->
+                              <label
+                                for="module_id"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Module Id</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="module_id"
+                                name="module_id"
+                                [(ngModel)]="module_id"
+                                placeholder="Module Id"
+                              />
+                            </div>
+                            <div>
+                              <label
+                                for="module_title"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Module Title</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="module_title"
+                                name="module_title"
+                                [(ngModel)]="module_title"
+                                placeholder="Module Title"
+                              />
+                              <label
+                                for="module_desc"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Module Description</label
+                              >
+                              <textarea
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="module_desc"
+                                name="module_desc"
+                                [(ngModel)]="module_desc"
+                                placeholder="Module Description"
+                              ></textarea>
+                              <label
+                                for="module_index"
+                                class="form-label txt-md"
+                                style="padding: 0 2px"
+                                >Module Index <i>i.e page index, 1-3</i></label
+                              >
+                              <input
+                                type="text"
+                                class="form-control input"
+                                style="margin-top: -8px"
+                                id="module_index"
+                                name="module_index"
+                                [(ngModel)]="module_index"
+                                placeholder="Module Index"
+                              />
+                              <div class="flex">
+                                <button class="btn btn-primary btn-sm mt-1">
+                                  Submit
+                                </button>
+                                <div *ngIf="resp != ''">{{ resp }}</div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </mat-step>
+
+                      <mat-step [completed]="false">
+                        <ng-template matStepLabel
+                          ><div class="txt-header mt-2 bold">
+                            ADD PAGE
+                          </div></ng-template
+                        >
+                        <div>
+                          <form
+                            #p="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="add_page(p.value)"
+                          >
+                            <label
+                              for="course_id"
+                              class="form-label txt-md"
+                              style="padding: 0 2px"
+                              >Course Id</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control input"
+                              style="margin-top: -8px"
+                              id="course_id"
+                              name="course_id"
+                              [(ngModel)]="course_id"
+                              placeholder="Course id"
+                              readonly
+                            />
+                            <!-- <select
+                              class="form-select txt-md input"
+                              style="margin-top: -8px"
+                              type="text"
+                              id="course_id"
+                              name="course_id"
+                              [(ngModel)]="course_id"
+                              aria-label="Default"
+                              (change)="on_change_course($event)"
+                            >
+                              <option value="" selected>
+                                -- Select Course --
+                              </option>
+                              <option
+                                *ngFor="let data of arrCourses"
+                                [value]="data.course_id"
+                              >
+                                {{ data.course_title }}
+                              </option>
+                            </select> -->
+                            <label
+                              for="module_id"
+                              class="form-label txt-md"
+                              style="padding: 0 2px"
+                              >Module Id</label
+                            >
+                            <select
+                              class="form-select txt-md input"
+                              style="margin-top: -8px"
+                              type="text"
+                              id="module_id"
+                              name="module_id"
+                              [(ngModel)]="module_id"
+                              aria-label="Default"
+                              (change)="
+                                on_change_module_generate_ques_list($event)
+                              "
+                            >
+                              <option value="" selected>
+                                -- Select Module --
+                              </option>
+                              <option
+                                *ngFor="let data of arrModules"
+                                [value]="data.module_id"
+                              >
+                                {{ data.module_title }}
+                              </option>
+                            </select>
+                            <!-- <div>
+                              <div> -->
+                            <label
+                              for="page_id"
+                              class="form-label txt-md"
+                              style="padding: 0 2px"
+                              >Page Number</label
+                            >
+
+                            <input
+                              type="text"
+                              class="form-control input"
+                              style="margin-top: -8px"
+                              id="page_id"
+                              name="page_id"
+                              [(ngModel)]="page_id"
+                              placeholder="Page Number"
+                            />
+
+                            <label
+                              for="page_id"
+                              class="form-label txt-md"
+                              style="padding: 0 2px"
+                              >Assessment Type</label
+                            >
+
+                            <select
+                              class="form-select txt-md input"
+                              style="margin-top: -8px"
+                              id="assessment_type"
+                              name="assessment_type"
+                              [(ngModel)]="assessment_type"
+                              (change)="on_change_assessment_type($event)"
+                            >
+                              <option value="0" selected>
+                                -- Select Type --
+                              </option>
+                              <option value="1">Quiz</option>
+                              <option value="2">Module Assessment</option>
+                              <option value="3">Course Assessment</option>
+                            </select>
+
+                            <label
+                              for="page_id"
+                              class="form-label txt-md"
+                              style="padding: 0 2px"
+                              >Question Type</label
+                            >
+
+                            <select
+                              [disabled]="isQCdisabled"
+                              class="form-select txt-md input"
+                              style="margin-top: -8px"
+                              id="question_category"
+                              name="question_category"
+                              [(ngModel)]="question_category"
+                            >
+                              <option value="0" selected>
+                                -- Select Type --
+                              </option>
+                              <option value="1">
+                                Multiple-Choice/True-False
+                              </option>
+                              <option value="2">Fillin the Blanks</option>
+                              <option value="3">Short Question</option>
+                              <option value="4">Verbal Assessment</option>
+                            </select>
+
+                            <label for="question_id" class="form-label txt-md"
+                              >Question Id</label
+                            >
+
+                            <select
+                              type="text"
+                              class="form-select txt-md input"
+                              [disabled]="isQIddisabled"
+                              style="margin-top: -8px"
+                              id="question_id"
+                              name="question_id"
+                              [(ngModel)]="question_id"
+                              aria-label="Default"
+                            >
+                              <option value="0" selected>
+                                -- Select Type --
+                              </option>
+                              <option
+                                *ngFor="let data of arrQuestions"
+                                [value]="data.question_id"
+                              >
+                                {{ data.question_text }}
+                              </option>
+                            </select>
+                            <div class="flex">
+                              <button class="btn btn-primary btn-sm mt-1">
+                                Submit
+                              </button>
+                              <div *ngIf="resp != ''">{{ resp }}</div>
+                            </div>
+                          </form>
+                        </div>
+                      </mat-step>
+                    </mat-vertical-stepper>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="CREATE PAGE" (click)="tab_click(1)">
+                <div>
+                  <div *ngFor="let data of arrCourses">
+                    <div class="course">
+                      {{ data.course_title }}
+                    </div>
+                    <div *ngFor="let mod of data.modules" style="color: #000">
+                      <div class="module mt-2 mb-1 bold" style="padding: 0">
+                        <mat-expansion-panel hideToggle="false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              {{ mod.module_title }}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="page text-center">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Page</th>
+                                  <th>Question</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let page of mod.pages">
+                                  <td style="vertical-align: middle">
+                                    {{ page.page_id }}
+                                  </td>
+                                  <td style="vertical-align: middle">
+                                    {{
+                                      page.question_id == 0
+                                        ? "NA"
+                                        : page.question_id
+                                    }}
+                                  </td>
+                                  <td>
+                                    <mat-icon
+                                      (click)="
+                                        create_content(page, data.course_id)
+                                      "
+                                      title="Create Content"
+                                      style="cursor: pointer"
+                                      >add_circle</mat-icon
+                                    >
+                                    <mat-icon
+                                      (click)="open_modal(data.course_id)"
+                                      title="Image List"
+                                      style="cursor: pointer"
+                                      >image</mat-icon
+                                    >
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </mat-expansion-panel>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </mat-drawer>
+    <div class="sidenav-content" style="min-height: 600px">
+      <mat-icon
+        (click)="drawer.toggle()"
+        style="
+          position: absolute;
+          right: 30px;
+          top: 10px;
+          color: #000;
+          cursor: pointer;
+        "
+        >menu</mat-icon
+      >
+      <div class="col-sm-12">
+        <div class="col-sm-12" *ngIf="!isCreateContent">
+          <app-faqs></app-faqs>
+        </div>
+        <div class="col-sm-12" *ngIf="isCreateContent">
+          <app-ckeditor></app-ckeditor>
+        </div>
+        <!-- <div class="col-sm-12">
+          <app-ckeditor></app-ckeditor>
+        </div> -->
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>

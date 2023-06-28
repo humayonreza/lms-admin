@@ -1,0 +1,571 @@
+<div class="col-sm-12" style="margin-top: 55px">
+  <mat-drawer-container class="sidenav-container" autosize>
+    <mat-drawer
+      #drawer
+      [ngClass]="!isSmart ? 'sidenav-big' : 'sidenav-smart'"
+      mode="side"
+      [opened]="true"
+    >
+      <div class="col-sm-12 flex" style="padding: 0 10px">
+        <div class="bold">
+          <h2 class="underline">Create Questions</h2>
+          <div class="txt-md mt-2">
+            Ensure that the question is clear and concise, using language that
+            is easily understandable to the intended audience. Avoid using
+            jargon or complex terminology unless it is necessary for the
+            specific context
+          </div>
+        </div>
+        <div>
+          <mat-icon (click)="drawer.toggle()" style="color: #000"
+            >cancel</mat-icon
+          >
+        </div>
+      </div>
+      <div class="col-sm-12" style="margin-top: 2px">
+        <div *ngFor="let data of arrCourses" style="color: #000">
+          <div class="module mt-2 mb-1 bold">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title class="txt-bg">
+                  {{ data.course_title }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="col-sm-12">
+                <div
+                  class="p-3 shadow"
+                  style="border: thin solid #eee; border-top-right-radius: 10%"
+                >
+                  <form
+                    #p="ngForm"
+                    autocomplete="off"
+                    (ngSubmit)="
+                      add_question_by_course_by_module(p.value, data.course_id)
+                    "
+                  >
+                    <div class="flex text-start">
+                      <div style="width: 50%">
+                        <select
+                          class="form-select txt-md"
+                          type="text"
+                          id="module_id"
+                          name="module_id"
+                          [(ngModel)]="module_id"
+                        >
+                          <option value="0" selected>- Select -</option>
+                          <option
+                            *ngFor="let row of data.modules"
+                            [value]="row.module_id"
+                          >
+                            {{ row.module_id }}
+                          </option>
+                        </select>
+                      </div>
+                      <div style="width: 40%">
+                        <select
+                          id="question_type"
+                          name="question_type"
+                          [(ngModel)]="question_type"
+                          class="form-select txt-md"
+                        >
+                          <option value="-1">- Select -</option>
+                          <option value="0">- T/F -</option>
+                          <option value="1">- M/C -</option>
+                          <option value="2">- F/B -</option>
+                          <option value="3">- S/Q -</option>
+                          <option value="4">- V/A -</option>
+                        </select>
+                      </div>
+                      <div style="margin: -5px 3px 0 3px">
+                        <button type="submit" mat-mini-fab color="default">
+                          <mat-icon>add_circle </mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <div
+                    class="mt-4 text-start txt-md"
+                    *ngIf="data.summary.length > 0"
+                  >
+                    <div class="flex bold">
+                      <div style="width: 50%; border-bottom: thin solid #ccc">
+                        Module
+                      </div>
+                      <div style="width: 20%; border-bottom: thin solid #ccc">
+                        Type
+                      </div>
+                      <div style="width: 20%; border-bottom: thin solid #ccc">
+                        Total
+                      </div>
+                      <div style="width: 10%; border-bottom: thin solid #ccc">
+                        View
+                      </div>
+                    </div>
+                    <div
+                      class="flex text-start"
+                      *ngFor="let dx of data.summary"
+                    >
+                      <div style="width: 50%">{{ dx.module_id }}</div>
+                      <div class="text-start" style="width: 20%">
+                        {{
+                          dx.question_type == 1
+                            ? "M/C"
+                            : dx.question_type == 2
+                            ? "F/B"
+                            : dx.question_type == 3
+                            ? "S/Q"
+                            : dx.question_type == 4
+                            ? "V/A"
+                            : "T/F"
+                        }}
+                      </div>
+                      <div
+                        class="text-start"
+                        style="width: 20%; padding-left: 8px"
+                      >
+                        {{ dx.Total }}
+                      </div>
+                      <div *ngIf="isSmart" style="width: 10%">
+                        <mat-icon
+                          title="View List"
+                          (click)="
+                            ques_list_by_param(
+                              data.course_id,
+                              dx.module_id,
+                              dx.question_type
+                            )
+                          "
+                          (click)="drawer.toggle()"
+                          >view_list</mat-icon
+                        >
+                      </div>
+                      <div *ngIf="!isSmart" style="width: 10%">
+                        <mat-icon
+                          title="View List"
+                          (click)="
+                            ques_list_by_param(
+                              data.course_id,
+                              dx.module_id,
+                              dx.question_type
+                            )
+                          "
+                          >view_list</mat-icon
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </div>
+    </mat-drawer>
+    <!--  -->
+    <mat-icon
+      (click)="drawer.toggle()"
+      style="
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        color: #000;
+        cursor: pointer;
+      "
+      >menu</mat-icon
+    >
+    <div class="p-2" style="min-height: 700px; margin-top: 30px">
+      <div *ngIf="isAddQuestion">
+        <mat-expansion-panel
+          style="margin-top: 5px; background-color: #fff"
+          [expanded]="true"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="txt-md">{{ txtAddQues }}</div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <form
+              #q="ngForm"
+              autocomplete="off"
+              (ngSubmit)="create_question(q.value)"
+            >
+              <label for="question_text" class="bold" style="margin-left: 5px"
+                >Question</label
+              >
+              <textarea
+                name="question_text"
+                id="question_text"
+                [(ngModel)]="question_text"
+                class="form-control input"
+                placeholder="Question"
+              ></textarea>
+
+              <div *ngIf="selectedQuesType == 0 || selectedQuesType == 1">
+                <label for="answer1" class="bold" style="margin-left: 5px"
+                  >Answer</label
+                >
+                <input
+                  type="text"
+                  name="answer1"
+                  id="answer1"
+                  [(ngModel)]="answer1"
+                  class="form-control input"
+                  placeholder="Answer"
+                />
+                <label for="notes" class="bold" style="margin-left: 5px"
+                  >Remarks</label
+                >
+                <input
+                  type="text"
+                  name="notes"
+                  id="notes"
+                  [(ngModel)]="notes"
+                  class="form-control input"
+                  placeholder="Remarks"
+                />
+                <div style="padding: 3px 3px 10px 3px">
+                  <button
+                    type="submit"
+                    mat-raised-button
+                    style="border: thin solid #eee"
+                  >
+                    Save Question
+                  </button>
+                </div>
+                <div class="mt-2">
+                  <label for="" class="bold" style="margin-left: 5px"
+                    >Multiple Choice Options</label
+                  >
+                  <div class="flex">
+                    <input
+                      type="text"
+                      #option_text
+                      name="option_text"
+                      id="option_text"
+                      class="form-control input"
+                      placeholder="Option Text"
+                      style="width: 70%"
+                    />
+                    <input
+                      type="text"
+                      #option_id
+                      name="option_id"
+                      id="option_id"
+                      class="form-control input"
+                      placeholder="Option ID"
+                      style="width: 30%"
+                    />
+                  </div>
+
+                  <div class="text-start" style="padding: 3px 3px 10px 3px">
+                    <button
+                      type="button"
+                      mat-raised-button
+                      style="border: thin solid #eee"
+                      (click)="
+                        save_option_by_question_id(
+                          option_text.value,
+                          option_id.value
+                        )
+                      "
+                    >
+                      Add Option
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-2" *ngIf="selectedQuesType == 2">
+                <label for="" class="bold" style="margin-left: 5px"
+                  >More than one Answer ?
+                </label>
+                <div>
+                  <mat-radio-button value="1" (click)="set_multiple_fb(true)"
+                    >Yes</mat-radio-button
+                  >
+                  <mat-radio-button value="2" (click)="set_multiple_fb(false)"
+                    >No</mat-radio-button
+                  >
+                </div>
+                <div class="flex-start">
+                  <div>
+                    <input
+                      name="answer1"
+                      id="answer1"
+                      [(ngModel)]="answer1"
+                      class="form-control input"
+                      placeholder="Answer"
+                      style="width: 100%"
+                    />
+                  </div>
+
+                  <div *ngIf="is_mul_fb">
+                    <input
+                      name="answer2"
+                      id="answer2"
+                      [(ngModel)]="answer2"
+                      class="form-control input"
+                      placeholder="Answer"
+                      style="width: 100%"
+                    />
+                  </div>
+                </div>
+                <input
+                  type="hidden"
+                  name="notes"
+                  id="notes"
+                  [(ngModel)]="notes"
+                  class="form-control input"
+                  placeholder="Remarks"
+                />
+
+                <div class="mt-2" style="padding: 3px 3px 10px 3px">
+                  <button
+                    type="submit"
+                    mat-raised-button
+                    style="border: thin solid #eee"
+                  >
+                    Save Question
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-2" *ngIf="selectedQuesType == 3">
+                <label for="answer3" class="bold" style="margin-left: 5px"
+                  >Answer
+                </label>
+                <textarea
+                  name="answer3"
+                  id="answer3"
+                  [(ngModel)]="answer3"
+                  class="form-control input"
+                  placeholder="Answer"
+                  style="width: 100%; height: 180px"
+                ></textarea>
+                <input
+                  type="hidden"
+                  name="notes"
+                  id="notes"
+                  [(ngModel)]="notes"
+                  class="form-control input"
+                  placeholder="Remarks"
+                />
+                <div style="padding: 3px 2px 10px 2px">
+                  <button
+                    type="submit"
+                    mat-raised-button
+                    style="border: thin solid #eee"
+                  >
+                    Save Question
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-2" *ngIf="selectedQuesType == 4">
+                <div style="padding: 3px 2px 10px 2px">
+                  <input
+                    type="hidden"
+                    name="answer4"
+                    id="answer4"
+                    [(ngModel)]="answer4"
+                    class="form-control input"
+                    placeholder="answer"
+                  />
+                  <input
+                    type="hidden"
+                    name="notes"
+                    id="notes"
+                    [(ngModel)]="notes"
+                    class="form-control input"
+                    placeholder="Remarks"
+                  />
+                  <div class="upload-btn-wrapper">
+                    <button class="btn txt-sm text-center">
+                      <input
+                        #fileToUpload
+                        (change)="onFileSelected($event)"
+                        type="file"
+                        name="myfile"
+                        accept=".jpg,.png,.ogg,.flac,.mp3,.mp4,.wav"
+                      />
+                      <div>UPLOAD</div>
+                      <div class="txt-sm">
+                        {{ uploadFile }}
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                <div style="padding: 3px 2px 10px 2px">
+                  <button
+                    type="submit"
+                    mat-raised-button
+                    style="border: thin solid #eee"
+                  >
+                    Save Question
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!--  -->
+          <div class="p-2 mt-2 mb-2 txt-md" *ngIf="arrSavedQues.length == 0">
+            No Question Added
+          </div>
+          <div *ngIf="arrSavedQues.length > 0">
+            <div class="mt-2">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Question ID</th>
+                    <th>Question</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ques of arrSavedQues">
+                    <td>{{ ques.question_id }}</td>
+                    <td>{{ ques.question_text }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2 p-2 txt-md" *ngIf="arrOptionMCTF.length == 0">
+              No Option Added
+            </div>
+            <div *ngIf="selectedQuesType == 0 || selectedQuesType == 1">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Option Text</th>
+                    <th>OptionID</th>
+                    <th>Resp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let opt of arrOptionMCTF">
+                    <td>{{ opt.option_text }}</td>
+                    <td>{{ opt.option_id }}</td>
+                    <td>{{ opt.resp }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--  -->
+        </mat-expansion-panel>
+      </div>
+      <div *ngIf="isListView">
+        <div
+          class=""
+          *ngFor="let data of arrQuesByQuery; let i = index"
+          style="color: #000"
+        >
+          <mat-expansion-panel style="margin-top: 5px; background-color: #fff">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="txt-sm">
+                {{ i + 1 + ".&nbsp;&nbsp;&nbsp;&nbsp;" + data.question_text }}
+                &nbsp; &nbsp;
+              </mat-panel-title>
+              <!-- <a
+                (click)="
+                  update_question(data.question_id, data.question_text, '0')
+                "
+                >edit</a
+              > -->
+            </mat-expansion-panel-header>
+            <div>
+              <div class="mt-2 mb-2 flex">
+                <textarea
+                  type="text"
+                  name="data.question_text"
+                  [(ngModel)]="data.question_text"
+                  value="{{ data.question_text }}"
+                  class="form-control txt-md"
+                  style="width: 60%"
+                ></textarea>
+                <textarea
+                  type="text"
+                  name="data.answer"
+                  [(ngModel)]="data.answer"
+                  value="{{ data.answer }}"
+                  class="form-control txt-md"
+                  style="width: 30%"
+                ></textarea>
+                <button
+                  mat-mini-fab
+                  style="margin-left: 10px; margin-top: 5px"
+                  color="default"
+                  (click)="update_question(data)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <div
+                *ngIf="data.question_type == 0 || data.question_type == 1"
+                class="col-sm-12 text-start txt-sm"
+              >
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Option Text</th>
+                      <th class="text-center">OptionID</th>
+                      <!-- <th class="text-center">Edit/Cancel</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dx of data.options">
+                      <td style="width: 70%">
+                        <!-- {{ dx.option_text }} -->
+
+                        <input
+                          type="text"
+                          name="dx.option_text"
+                          [(ngModel)]="dx.option_text"
+                          value="{{ dx.option_text }}"
+                          class="form-control txt-md"
+                        />
+                      </td>
+                      <td class="text-center">
+                        <!-- {{ dx.option_id }} -->
+                        <input
+                          type="text"
+                          name="dx.option_id"
+                          [(ngModel)]="dx.option_id"
+                          value="{{ dx.option_id }}"
+                          class="form-control txt-md"
+                        />
+                      </td>
+                      <!-- <td class="text-center"> -->
+                      <!-- <mat-icon
+                          title="Edit Option"
+                          style="margin-right: 10px"
+                          update_option_by_question_id(data.question_id,
+                          dx.option_text,
+                          dx.option_id)
+                          >edit</mat-icon
+                        > -->
+                      <!-- <mat-icon
+                          title="Remove"
+                          color="warn"
+                          (click)="
+                            ques_list_by_param(
+                              data.course_id,
+                              dx.module_id,
+                              dx.question_type
+                            )
+                          "
+                          >cancel</mat-icon
+                        > -->
+                      <!-- </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  </mat-drawer-container>
+</div>

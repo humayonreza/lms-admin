@@ -1,0 +1,625 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+// ============  Text ========
+.txt-sm {
+  font-size: 11px;
+}
+
+.txt-md {
+  font-size: 13px;
+}
+
+.txt-bg {
+  font-size: 15px;
+}
+
+.txt-lg {
+  font-size: 17px;
+}
+
+.txt-xl {
+  font-size: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.header {
+  font-weight: bold;
+  text-shadow: 2px 3px #ccc;
+}
+
+.txtArea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.color-primary {
+  color: #000;
+}
+
+.color-secondary {
+  color: green;
+}
+
+.color-light {
+  color: #777;
+}
+
+.reg {
+  font-size: 15px;
+}
+
+.italic {
+  font-size: 15px;
+  font-style: italic;
+}
+
+// ==================  Table =================
+
+.th {
+  font-size: 13px;
+  color: #000;
+  font-weight: bold;
+}
+
+.td {
+  font-size: 12px;
+  color: #000;
+  padding: 0;
+}
+
+.table .td {
+  font-size: 12px;
+  color: #000;
+  padding: 0;
+}
+
+.tableA .th {
+  font-weight: bold;
+  font-size: 15px;
+  border: thin solid #eee;
+  padding: 3px 10px;
+}
+
+.tableA .td {
+  font-weight: normal;
+  font-size: 15px;
+  border: thin solid #eee;
+  padding: 3px 10px;
+}
+
+.course {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.subject {
+  font-size: 14px;
+  padding-left: 5px;
+}
+
+.page {
+  font-weight: normal;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.border {
+  border: thin solid #444;
+}
+
+.panel {
+  border-radius: 4px;
+  box-shadow: 5px 6px 10px rgba(124, 122, 122, 0.35);
+  margin: 5px 0;
+  padding: 10px;
+}
+
+.panel-wo-border {
+  border-radius: 4px;
+  box-shadow: 5px 6px 10px rgba(248, 243, 243, 0.35);
+}
+
+.btn-img-upload {
+  background-color: brown;
+  color: #eee;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.btn-page-indicator {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 2px 3px 5px rgba(248, 243, 243, 0.35);
+}
+
+.assessment-container {
+  padding: 15px;
+  border: thin solid #eee;
+}
+
+.ans_incorrect {
+  color: red;
+  font-size: 17px;
+}
+
+.ans_correct {
+  color: #000;
+  font-size: 17px;
+}
+
+.content {
+  height: 100vh;
+  width: 100%;
+}
+
+.content-row {
+  border-bottom: thin solid #eee;
+  padding: 5px 20;
+}
+
+// =================  WEB CONTENT ===============
+.img-fit {
+  width: 100%;
+  /* or any custom size */
+  height: 100%;
+  object-fit: contain;
+}
+
+.light-border {
+  border: thin solid #eee;
+}
+
+::ng-deep .mat-tab-list .mat-tab-label .mat-tab-label-active {
+  color: red;
+  background-color: green;
+}
+
+.mat-tab-label {
+  color: #000 !important;
+}
+
+label {
+  padding: 0 2px;
+  border: thin solid green;
+  width: 100%;
+  margin-left: 2px;
+  background-color: green;
+  color: #fff;
+}
+
+// ===================== New Style ===================
+
+.input {
+  color: green;
+  font-size: 14px;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  margin: 2px;
+}
+
+.btn {
+  border: 1px solid #444;
+  color: #fff;
+  transition: 0.5s;
+  font-size: 14px;
+  border-radius: 0;
+  background-color: green;
+  margin-right: 2px;
+}
+
+.btn-purchased {
+  border: 1px solid #999;
+  color: #000;
+  transition: 0.5s;
+  font-size: 14px;
+  border-radius: 0;
+  background-color: #eee;
+  padding: 6px 0;
+}
+
+.btn:hover,
+.input:hover {
+  border: thin solid #ccc;
+  transition: 0.5s;
+}
+
+.img-thumbnail {
+  padding: 10px;
+  border: thin solid #eee;
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}
+
+.mc_option:hover {
+  color: tomato;
+}
+
+// ====================================  30/04/2023 ============================
+
+.color-red {
+  color: red;
+}
+
+.color-black {
+  color: black;
+}
+
+.color-green {
+  color: green;
+}
+
+.color-blue {
+  color: blue;
+}
+
+.sidenav-container {
+  width: 100%;
+  color: #000;
+}
+
+.sidenav-content {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.sidenav-big {
+  width: 30%;
+}
+
+.sidenav-smart {
+  width: 100%;
+}
+
+// ====================================== Scroll Bar
+::-webkit-scrollbar {
+  width: 3px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 1px rgb(172, 47, 47);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+  cursor: pointer;
+}
+
+// ========== Media Query ===============
+@media only screen and (min-width: 800px) {
+  .txt-font {
+    font-size: 15px;
+    font-family: "Arial Narrow";
+  }
+  .isSmart {
+    display: none;
+  }
+
+  .isTab {
+    display: none;
+  }
+
+  .isBig {
+    display: inline;
+  }
+
+  .inner {
+    padding: 20px 50px;
+  }
+
+  .outer {
+    padding: 20px 40px;
+  }
+}
+
+/*
+  padding-campaign-option
+  inner
+  */
+
+@media only screen and (min-width: 480px) and (max-width: 750px) {
+  .txt-font {
+    font-size: 10px;
+    font-family: "Arial Narrow";
+  }
+
+  .isSmart {
+    display: none;
+  }
+
+  .isBig {
+    display: none;
+  }
+
+  .isTab {
+    display: inline;
+  }
+
+  .inner {
+    padding: 20px 60px;
+  }
+
+  .outer {
+    padding: 10px 20px;
+  }
+
+  .frame-reg {
+    padding: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .txt-font {
+    font-size: 17px;
+    font-family: "Arial Narrow";
+  }
+
+  .isTab {
+    display: none;
+  }
+
+  .isBig {
+    display: none;
+  }
+
+  .isSmart {
+    display: inline;
+  }
+
+  .inner {
+    padding: 20px;
+  }
+
+  .outer {
+    padding: 10px 15px;
+  }
+
+  .frame-reg {
+    padding: 20px 15px;
+  }
+}
+
+// ================================== Layout ======================
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.outline {
+  border: 10px solid #eee;
+}
+
+.border-light {
+  border: thin solid #ccc;
+  border-radius: 5px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.side-border-thick-left {
+  border-left: 15px solid green;
+}
+
+.side-border-thick-right {
+  border-right: 15px solid green;
+}
+
+.review {
+  margin: 15px 5px;
+  background-color: #eee;
+  border-left: 5px solid green;
+  border-right: thin solid green;
+  border-top: thin solid green;
+  border-bottom: thin solid green;
+  padding: 10px 15px;
+}
+
+.top-bar {
+  background-color: #eee;
+  border-bottom: thin solid #ccc;
+  padding: 5px 20px;
+}
+
+// ================================ Button / icon / input /select /textarea =====================
+
+mat-icon {
+  cursor: pointer;
+  color: green;
+}
+
+.mat-icon-isPassed {
+  color: blue;
+}
+
+.mat-icon-isNotPassed {
+  color: #999;
+}
+
+// .mat-icon-isFailed {
+//   color: #777;
+// }
+
+// .mat-icon-isNotFailed {
+//   color: #777;
+// }
+
+.btn-menu-con {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  z-index: 9999;
+}
+// .nav-link {
+//   color: #fff;
+// }
+
+// =============================  Sticky ================================
+
+mat-icon .menu {
+  position: absolute;
+  right: 30px;
+  top: 15px;
+  color: #000;
+  cursor: pointer;
+}
+
+.navbar a {
+  color: #000;
+  text-decoration: none;
+}
+
+.btn-menu {
+  background-color: rgb(11, 66, 11);
+  border: thin solid green;
+  color: white;
+  transition: 0.5s;
+  margin: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.btn-menu:hover {
+  background-color: #eee;
+  color: green;
+  transition: 0.5s;
+  font-weight: bold;
+}
+.mat-icon-menu {
+  color: rgb(241, 10, 10);
+}
+
+// ------------------- Sticky Button -----------------------
+$buttons-height: 60px;
+$sticky-width: 60px;
+$padding: 10px;
+
+.sticky-container {
+  background-color: brown;
+  font-size: 12px;
+  padding: $padding;
+
+  position: fixed;
+  top: 60%;
+  left: -20px;
+  width: 60px;
+  height: auto;
+  z-index: 9999;
+  margin-top: -$buttons-height;
+  text-align: center;
+  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  opacity: 0.6;
+  transform: rotate(-90deg);
+  color: #fff;
+  font-weight: bold;
+  &:hover {
+    width: $sticky-width;
+    opacity: 1;
+    font-weight: bold;
+    transition: 0.5s;
+    // background-color: aqua;
+  }
+}
+.sticky-container i,
+.sticky-container mat-icon {
+  color: brown;
+}
+.sticky-container i:hover {
+  color: red;
+}
+
+.sticky-container mat-icon:hover {
+  color: red;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-image-wrapper {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.underline {
+  display: inline;
+  border-bottom: 2px solid #888;
+  padding-bottom: 2px;
+  transition: 0.5s;
+}
+
+.underline:hover {
+  display: inline;
+  border-bottom: 4px solid #444;
+  padding-bottom: 2px;
+  transition: 0.5s;
+}

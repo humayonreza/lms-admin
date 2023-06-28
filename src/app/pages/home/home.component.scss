@@ -1,0 +1,15 @@
+.link {
+  text-decoration: none;
+  color: #444;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: 0.5s;
+}

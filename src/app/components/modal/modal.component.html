@@ -1,0 +1,112 @@
+<div *ngIf="arr.action_type == 1" class="col-sm-12 text-start p-3">
+  <!-- <div class="col-sm-12 text-center p-1" style="background-color: #555">
+    <h1 class="bold mt-1" style="text-shadow: 1px 2px #999; color: #fff">
+      {{ arr.title + " for " + arr.course_id }}
+    </h1>
+  </div> -->
+  <div class="col-sm-12 text-center p-2" style="border: thin solid #ddd">
+    <div class="header">Media List</div>
+    <div class="txt-md">
+      {{ arr.title + " for " + arr.course_id }}
+    </div>
+  </div>
+  <div
+    class="col-sm-12 p-2"
+    *ngFor="let data of arrMediaList"
+    style="border: thin solid #ddd"
+  >
+    <div class="row">
+      <div class="col-sm-2 text-end">
+        <div>
+          <img src="{{ data.media_path }}" alt="" width="100" height="auto" />
+        </div>
+      </div>
+      <div class="col-sm-10 text-start">
+        <div>
+          Type&nbsp;:&nbsp;{{
+            data.media_type == 1
+              ? "Image"
+              : data.media_type == 2
+              ? "Audio"
+              : "Video"
+          }}
+        </div>
+        <div>Course&nbsp;:&nbsp;{{ data.course_id }}</div>
+        <div>Media Path&nbsp;:&nbsp;{{ data.media_path }}</div>
+      </div>
+    </div>
+  </div>
+  <!-- <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Type</th>
+        <th>Course ID</th>
+        <th>Media Path</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of arrMediaList">
+        <td>
+          <img src="{{ data.media_path }}" alt="" width="100" height="auto" />
+        </td>
+        <td>
+          {{
+            data.media_type == 1
+              ? "Image"
+              : data.media_type == 2
+              ? "Audio"
+              : "Video"
+          }}
+        </td>
+        <td>{{ data.course_id }}</td>
+        <td>{{ data.media_path }}</td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+
+<!-- <div *ngIf="arr.action_type == 2" class="col-sm-12 text-start p-3">
+  <h1>{{ arr.title }}</h1>
+  <div class="flex-start">
+    <textarea
+      type="text"
+      name="arr.load.question_text"
+      [(ngModel)]="arr.load.question_text"
+      value="{{ arr.load.question_text }}"
+      class="form-control bold txt-md"
+    ></textarea>
+    <button
+      mat-mini-fab
+      style="margin-left: 10px"
+      color="default"
+      (click)="
+        update_question(arr.load.question_id, arr.load.question_text, '0')
+      "
+    >
+      <mat-icon>touch_app</mat-icon>
+    </button>
+  </div>
+  <div *ngFor="let opt of arr.load.options" style="padding-left: 10px">
+    <div class="flex-start mt-1">
+      <textarea
+        type="text"
+        name="opt.option_text"
+        [(ngModel)]="opt.option_text"
+        value="{{ opt.option_text }}"
+        class="form-control txt-md"
+        style="height: 30px"
+      ></textarea>
+      <button
+        mat-mini-fab
+        style="margin-left: 10px"
+        color="default"
+        (click)="
+          update_question(arr.load.question_id, opt.option_text, opt.option_id)
+        "
+      >
+        <mat-icon>touch_app</mat-icon>
+      </button>
+    </div>
+  </div>
+</div> -->

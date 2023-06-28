@@ -1,0 +1,139 @@
+<nav
+  class="navbar navbar-expand-lg fixed-top shadow"
+  style="padding: 0 2px; background-color: #ccc; border-bottom: thin solid #999"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/" style="padding: 5px">
+      <img
+        class="shadow"
+        style="border: thin solid #eee; border-radius: 50%"
+        src="{{ mediaPath + 'images/site/common/logo.png' }}"
+        alt=""
+        width="50"
+        height="50"
+      /><span class="orgTxt" style="margin-left: 5px">TRAINED UP</span>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngFor="let li of stateService.arrNav[0].links">
+          <button
+            type="button"
+            [disabled]="!stateService.isSigned"
+            class="nav-link"
+            (click)="change_route(li.route)"
+            aria-current="page"
+            style="cursor: pointer"
+          >
+            {{ li.link_name }}
+          </button>
+        </li>
+      </ul> -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="padding-right: 30px">
+        <li
+          *ngIf="stateService.isSigned"
+          style="cursor: pointer"
+          class="nav-link"
+          (click)="logoff_now()"
+        >
+          {{ "Welcome, " + stateService.loggedUser }} |
+          <span style="cursor: pointer; color: blue; text-decoration: underline"
+            >Logoff</span
+          >
+        </li>
+        <li
+          *ngIf="!stateService.isSigned"
+          style="cursor: pointer; color: blue; text-decoration: underline"
+          class="nav-link"
+          (click)="login_now()"
+        >
+          Login
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!--<div class="col-sm-12">
+  <div class="text-center">
+    <div class="col-sm-12">
+      <img
+        src="{{ mediaPath + 'images/site/common/menu-banner.png' }}"
+        alt="not found"
+        width="100%"
+        height="auto"
+      />
+    </div>
+    <div class="col-sm-12">
+      <button
+        type="button"
+        *ngFor="let li of arrNav"
+        routerLink="{{ li.route }}"
+        class="btn-menu shadow txt-md"
+      >
+        <div>
+          <mat-icon class="mat-icon-menu">{{ li.icon }}</mat-icon>
+          <div class="txt-md" style="margin-top: -8px">
+            {{ li.link_name }}
+          </div>
+        </div>
+      </button>
+
+      <button
+        *ngIf="stateService.isSigned"
+        type="button"
+        class="btn-menu shadow"
+        (click)="logoff_now()"
+      >
+        <div>
+          <mat-icon class="mat-icon-menu">people</mat-icon>
+          <div class="txt-md" style="margin-top: -8px">Log-off</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+ <div class="col-sm-12 p-2 shadow txt-md" *ngIf="!stateService.isSigned">
+  <form #l="ngForm" autocomplete="off" (ngSubmit)="login(l.value)">
+    <div>
+      <label for="user_email">Email:</label>
+      <input
+        type="email"
+        class="form-control input txt-md"
+        id="student_email"
+        name="student_email"
+        [(ngModel)]="student_email"
+        placeholder="Email Address"
+      />
+    </div>
+
+    <div class="mt-2">
+      <label for="user_email">Password:</label>
+      <input
+        class="form-control input txt-md"
+        id="passwd"
+        name="passwd"
+        [(ngModel)]="passwd"
+        placeholder="Password"
+      />
+    </div>
+
+    <div class="bold mb-3 txt-md" style="font-style: oblique">
+      Don't have account,
+      <a (click)="signup_now()" style="cursor: pointer; color: blue">SIGN UP</a>
+      now
+    </div>
+    <button type="submit" class="btn">Login</button>
+  </form>
+</div> -->

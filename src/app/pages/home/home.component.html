@@ -1,0 +1,44 @@
+<div class="row" style="margin-top: 60px">
+  <div class="col-sm-12 outer">
+    <h2>Welcome {{ stateService.loggedUser }}</h2>
+    <div class="p-2">
+      <div class="txt-bg underline bold">
+        You are autorized to actions given on the menu bar for following
+        courses:
+      </div>
+      <div>
+        <div>
+          <div *ngFor="let course of stateService.arrCourses; let i = index">
+            <div class="bold p-2">
+              {{ i + 1 + ". " + course.course_id }}
+            </div>
+            <div>
+              <ul>
+                <li>
+                  <a class="link" (click)="educator_action(course.course_id, 1)"
+                    >Manage contents</a
+                  >
+                </li>
+                <li>
+                  <a class="link" (click)="educator_action(course.course_id, 2)"
+                    >Manage questions</a
+                  >
+                </li>
+                <li>
+                  <a class="link" (click)="educator_action(course.course_id, 3)"
+                    >Manage medias</a
+                  >
+                </li>
+                <li>
+                  <a class="link" (click)="educator_action(course.course_id, 4)"
+                    >Evaluate assessment</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
